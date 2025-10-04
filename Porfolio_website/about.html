@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="icon" href="./images/favicon.png" />
+    <title>My Projects | Personal Portfolio</title>
+    <style>
+      /* Navbar Styles */
+      .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background-color: #d9b4b4;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        padding: 1rem 0;
+      }
+
+      .navbar-flex {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      /* Navbar Image Rounding */
+      .img_rounding {
+        border-radius: 50%;
+        width: 400px;
+        height: 400px;
+        object-fit: cover;
+        border: 2px solid #ffffff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+
+      .img_rounding:hover {
+        transform: scale(1.1);
+      }
+
+      /* Main Menu Styles */
+      .main-menu-list {
+        display: flex;
+        list-style: none;
+        gap: 1.5rem;
+        align-items: center;
+        margin: 0;
+        padding: 0;
+      }
+
+      .main-menu-list a {
+        text-decoration: none;
+        color: #333;
+        font-weight: 600;
+        transition: color 0.3s ease;
+      }
+
+      .main-menu-list a:hover {
+        color: #0066cc;
+      }
+
+      /* Mobile Menu Toggle - Hidden by default */
+      .mobile-menu-toggle {
+        display: none;
+        cursor: pointer;
+      }
+
+      /* Mobile Menu Items - Hidden by default */
+      .mobile-menu-items {
+        display: none;
+      }
+
+      /* Responsive Styles */
+      @media (max-width: 768px) {
+        .main-menu-items {
+          display: none;
+        }
+
+        .mobile-menu-toggle {
+          display: block;
+        }
+
+        /* Show mobile menu when checkbox is checked */
+        .mobile-menu-items.active {
+          display: block;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          background-color: #ffffff;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          padding: 1rem;
+          z-index: 1001;
+        }
+
+        .mobile-menu-list {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        .mobile-menu-list a {
+          display: block;
+          padding: 0.5rem 0;
+        }
+      }
+
+      /* Projects Section Styles */
+      .section {
+        padding: 4rem 0;
+      }
+
+      .container {
+        width: 90%;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .section-title {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 3rem;
+        color: #333;
+      }
+
+      .projects-filter {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+      }
+
+      .filter-btn {
+        padding: 0.5rem 1.5rem;
+        background: #f1f1f1;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+
+      .filter-btn:hover,
+      .filter-btn.active {
+        background: #d9b4b4;
+        color: white;
+      }
+
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 2rem;
+      }
+
+      .project-card {
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        background: white;
+      }
+
+      .project-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .project-image {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+      }
+
+      .project-content {
+        padding: 1.5rem;
+      }
+
+      .project-title {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+        color: #333;
+      }
+
+      .project-category {
+        display: inline-block;
+        background: #f1f1f1;
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        margin-bottom: 1rem;
+        color: #666;
+      }
+
+      .project-description {
+        color: #666;
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+      }
+
+      .project-links {
+        display: flex;
+        gap: 1rem;
+      }
+
+      .project-link {
+        display: inline-block;
+        padding: 0.5rem 1rem;
+        background: #d9b4b4;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: 600;
+        transition: background 0.3s ease;
+      }
+
+      .project-link:hover {
+        background: #c19a9a;
+      }
+
+      .project-link.live {
+        background: #0066cc;
+      }
+
+      .project-link.live:hover {
+        background: #0052a3;
+      }
+
+      @media (max-width: 768px) {
+        .projects-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar" role="navigation" aria-label="Main Navigation">
+      <div class="navbar-flex container">
+        <!-- <a href="/" aria-label="Logo Home Link">
+          <img
+            src="images/logo.svg"
+            alt="personal portfolio logo"
+            class="img_rounding"
+          />
+        </a> -->
+
+        <div class="main-menu-items">
+          <ul class="main-menu-list">
+            <li><a href="/">Home</a></li>
+            <li><a href="skills.html">Skills</a></li>
+            <li><a href="projects.html" class="active">Projects</a></li>
+            <li><a href="abouts.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li>
+              <a
+                href="https://facebook.com"
+                target="_blank"
+                aria-label="Facebook"
+              >
+                <i class="fa-brands fa-facebook"></i>
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://twitter.com"
+                target="_blank"
+                aria-label="Twitter"
+              >
+                <i class="fa-brands fa-twitter"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Mobile Menu - No JavaScript Version -->
+        <div class="mobile-menu">
+          <label for="mobile-menu-checkbox" class="mobile-menu-toggle">
+            <i class="fas fa-bars fa-2x"></i>
+          </label>
+          <input
+            type="checkbox"
+            id="mobile-menu-checkbox"
+            class="mobile-menu-checkbox"
+          />
+
+          <div class="mobile-menu-items">
+            <ul class="mobile-menu-list">
+              <li><a href="/">Home</a></li>
+              <li><a href="skills.html">Skills</a></li>
+              <li><a href="projects.html" class="active">Projects</a></li>
+              <!-- <li><a href="abouts.html">About</a></li> -->
+              <li><a href="contact.html">Contact</a></li>
+              <li>
+                <a
+                  href="https://facebook.com"
+                  target="_blank"
+                  aria-label="Facebook"
+                >
+                  <i class="fa-brands fa-facebook"></i> Facebook
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://twitter.com"
+                  target="_blank"
+                  aria-label="Twitter"
+                >
+                  <i class="fa-brands fa-twitter"></i> Twitter
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main style="margin-top: 80px">
+      <!-- Projects Section -->
+      <section class="projects section" id="projects">
+        <div class="container">
+          <h2 class="section-title">My Projects</h2>
+          <p
+            class="section-subtitle"
+            style="text-align: center; margin-bottom: 2rem; color: #666"
+          >
+            Here's a collection of my recent work and personal projects
+          </p>
+
+          <!-- Projects Filter -->
+          <div class="projects-filter">
+            <button class="filter-btn active" data-filter="all">All</button>
+            <button class="filter-btn" data-filter="web">
+              Web Development
+            </button>
+            <button class="filter-btn" data-filter="mobile">Mobile Apps</button>
+            <button class="filter-btn" data-filter="design">
+              UI/UX Design
+            </button>
+          </div>
+
+          <!-- Projects Grid -->
+          <div class="projects-grid">
+            <!-- Project 1 -->
+            <div class="project-card" data-category="web">
+              <img
+                src="https://via.placeholder.com/600x400?text=E-Commerce+Website"
+                alt="E-Commerce Website"
+                class="project-image"
+              />
+              <div class="project-content">
+                <h3 class="project-title">E-Commerce Platform</h3>
+                <span class="project-category">Web Development</span>
+                <p class="project-description">
+                  A full-featured e-commerce platform built with React, Node.js,
+                  and MongoDB. Includes product listings, shopping cart, user
+                  authentication, and payment processing.
+                </p>
+                <div class="project-links">
+                  <a href="#" class="project-link live">Live Demo</a>
+                  <a href="#" class="project-link">View Code</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="project-card" data-category="mobile">
+              <img
+                src="https://via.placeholder.com/600x400?text=Fitness+Tracker+App"
+                alt="Fitness Tracker App"
+                class="project-image"
+              />
+              <div class="project-content">
+                <h3 class="project-title">Fitness Tracker App</h3>
+                <span class="project-category">Mobile Apps</span>
+                <p class="project-description">
+                  A cross-platform mobile application for tracking workouts and
+                  nutrition. Built with React Native and Firebase for real-time
+                  data synchronization.
+                </p>
+                <div class="project-links">
+                  <a href="#" class="project-link live">App Store</a>
+                  <a href="#" class="project-link">View Code</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="project-card" data-category="design">
+              <img
+                src="https://via.placeholder.com/600x400?text=Banking+App+UI"
+                alt="Banking App UI"
+                class="project-image"
+              />
+              <div class="project-content">
+                <h3 class="project-title">Banking App UI Design</h3>
+                <span class="project-category">UI/UX Design</span>
+                <p class="project-description">
+                  Modern and intuitive banking app interface designed in Figma.
+                  Focused on creating a seamless user experience for financial
+                  transactions.
+                </p>
+                <div class="project-links">
+                  <a href="#" class="project-link live">View Prototype</a>
+                  <a href="#" class="project-link">Case Study</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project 4 -->
+            <div class="project-card" data-category="web">
+              <img
+                src="https://via.placeholder.com/600x400?text=Task+Management+System"
+                alt="Task Management System"
+                class="project-image"
+              />
+              <div class="project-content">
+                <h3 class="project-title">Task Management System</h3>
+                <span class="project-category">Web Development</span>
+                <p class="project-description">
+                  A collaborative task management tool with real-time updates.
+                  Built with Vue.js, Node.js, and WebSockets for instant team
+                  collaboration.
+                </p>
+                <div class="project-links">
+                  <a href="#" class="project-link live">Live Demo</a>
+                  <a href="#" class="project-link">View Code</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project 5 -->
+            <div class="project-card" data-category="mobile">
+              <img
+                src="https://via.placeholder.com/600x400?text=Recipe+Sharing+App"
+                alt="Recipe Sharing App"
+                class="project-image"
+              />
+              <div class="project-content">
+                <h3 class="project-title">Recipe Sharing App</h3>
+                <span class="project-category">Mobile Apps</span>
+                <p class="project-description">
+                  A community-driven recipe sharing platform for food
+                  enthusiasts. Features include photo uploads, step-by-step
+                  instructions, and user ratings.
+                </p>
+                <div class="project-links">
+                  <a href="#" class="project-link live">Play Store</a>
+                  <a href="#" class="project-link">View Code</a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project 6 -->
+            <div class="project-card" data-category="design">
+              <img
+                src="https://via.placeholder.com/600x400?text=Portfolio+Website+Design"
+                alt="Portfolio Website Design"
+                class="project-image"
+              />
+              <div class="project-content">
+                <h3 class="project-title">Portfolio Website Design</h3>
+                <span class="project-category">UI/UX Design</span>
+                <p class="project-description">
+                  Minimalist portfolio website design for a photographer.
+                  Focused on showcasing visual content with clean typography and
+                  intuitive navigation.
+                </p>
+                <div class="project-links">
+                  <a href="#" class="project-link live">View Design</a>
+                  <a href="#" class="project-link">Case Study</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Call to Action -->
+      <section class="section" style="background: #f9f9f9; text-align: center">
+        <div class="container">
+          <h2>Have a project in mind?</h2>
+          <p style="max-width: 600px; margin: 0 auto 2rem; color: #666">
+            I'm always interested in hearing about new projects and
+            opportunities. Whether you have a question or just want to say hi,
+            I'll get back to you!
+          </p>
+          <a href="contact.html" class="btn" style="display: inline-block"
+            >Contact Me</a
+          >
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="container footer-flex">
+          <ul class="footer-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="skills.html">Skills</a></li>
+            <li><a href="projects.html" class="active">Projects</a></li>
+            <!-- <li><a href="abouts.html">About</a></li> -->
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+          <p>&copy; 2025 Jamil's Portfolio. All rights reserved</p>
+        </div>
+      </footer>
+    </main>
+
+    <style>
+      /* Mobile Menu Checkbox Hack */
+      .mobile-menu-checkbox {
+        display: none;
+      }
+
+      .mobile-menu-items {
+        display: none;
+      }
+
+      .mobile-menu-checkbox:checked ~ .mobile-menu-items {
+        display: block;
+      }
+    </style>
+
+    <script>
+      // Simple filter functionality
+      document.addEventListener("DOMContentLoaded", function () {
+        const filterButtons = document.querySelectorAll(".filter-btn");
+        const projectCards = document.querySelectorAll(".project-card");
+
+        filterButtons.forEach((button) => {
+          button.addEventListener("click", () => {
+            // Update active button
+            filterButtons.forEach((btn) => btn.classList.remove("active"));
+            button.classList.add("active");
+
+            const filterValue = button.getAttribute("data-filter");
+
+            // Filter projects
+            projectCards.forEach((card) => {
+              if (
+                filterValue === "all" ||
+                card.getAttribute("data-category") === filterValue
+              ) {
+                card.style.display = "block";
+              } else {
+                card.style.display = "none";
+              }
+            });
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

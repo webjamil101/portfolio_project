@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="stylesheet" href="./css/knowledge.css" />
+    <link rel="icon" href="./images/favicon.png" type="image/png"/>
+    <title>Personal Portfolio</title>
+    <style>
+      /* Global Styles */
+      :root {
+        --primary-color: #d9b4b4;
+        --secondary-color: #0066cc;
+        --text-color: #333;
+        --light-color: #f8f9fa;
+        --white: #ffffff;
+      }
+      
+      body {
+        font-family: 'Open Sans', sans-serif;
+        line-height: 1.6;
+        color: var(--text-color);
+        margin: 0;
+        padding: 0;
+      }
+      
+      .container {
+        width: 90%;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      
+      .section {
+        padding: 4rem 0;
+      }
+      
+      .section-title {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 2rem;
+        color: var(--text-color);
+      }
+      
+      .btn {
+        display: inline-block;
+        background-color: var(--secondary-color);
+        color: var(--white);
+        padding: 0.8rem 1.5rem;
+        border-radius: 4px;
+        text-decoration: none;
+        font-weight: 600;
+        transition: background-color 0.3s ease;
+      }
+      
+      .btn:hover {
+        background-color: #004d99;
+      }
+      
+      /* Navbar Styles */
+      .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background-color: var(--primary-color);
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        padding: 1rem 0;
+      }
+      
+      .navbar-flex {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      
+      /* Navbar Logo */
+      .navbar .logo img {
+        height: 50px;
+        width: auto;
+        transition: transform 0.3s ease;
+      }
+      
+      .navbar .logo img:hover {
+        transform: scale(1.1);
+      }
+      /* Dropdown Styles */
+      .dropdown {
+        position: relative;
+      }
+
+      .dropdown-toggle::after {
+        content: " ▾";
+        display: inline-block;
+      }
+
+      .dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: #fff;
+        min-width: 200px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        z-index: 1000;
+      }
+
+      .dropdown:hover .dropdown-menu {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .dropdown-menu li {
+        padding: 0;
+      }
+
+      .dropdown-menu a {
+        display: block;
+        padding: 10px 15px;
+        color: #333;
+        transition: background 0.3s;
+      }
+
+      .dropdown-menu a:hover {
+        background: #f5f5f5;
+      }
+
+      /* Mobile Dropdown Styles */
+      .mobile-dropdown .dropdown-submenu {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        padding-left: 20px;
+      }
+
+      .mobile-menu-checkbox:checked ~ .mobile-menu-items .mobile-dropdown .dropdown-submenu {
+        max-height: 500px; /* Adjust based on content */
+      }
+
+      /* Responsive Adjustments */
+      @media (max-width: 768px) {
+        .dropdown-menu {
+          position: static;
+          box-shadow: none;
+          opacity: 1;
+          visibility: visible;
+          display: none;
+          background: #f9f9f9;
+        }
+        
+        .dropdown:hover .dropdown-menu {
+          display: block;
+        }
+        
+        .mobile-dropdown .dropdown-toggle::after {
+          content: " ▾";
+          float: right;
+        }
+      }
+      /* Main Menu Styles */
+      .main-menu-list {
+        display: flex;
+        list-style: none;
+        gap: 1.5rem;
+        align-items: center;
+        margin: 0;
+        padding: 0;
+      }
+      
+      .main-menu-list a {
+        text-decoration: none;
+        color: var(--text-color);
+        font-weight: 600;
+        transition: color 0.3s ease;
+      }
+      
+      .main-menu-list a:hover {
+        color: var(--secondary-color);
+      }
+      
+      /* Mobile Menu */
+      .mobile-menu-toggle {
+        display: none;
+        cursor: pointer;
+      }
+      
+      .mobile-menu-checkbox {
+        display: none;
+      }
+      
+      .mobile-menu-items {
+        display: none;
+      }
+      
+      /* About Section */
+      .about-content {
+        display: flex;
+        align-items: center;
+        gap: 3rem;
+      }
+      
+      .about-image {
+        flex: 1;
+      }
+      
+      .about-text {
+        flex: 1;
+      }
+      
+      .img_rounding {
+        border-radius: 50%;
+        width: 400px;
+        height: 400px;
+        object-fit: cover;
+        border: 2px solid var(--white);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+      
+      .img_rounding:hover {
+        transform: scale(1.05);
+      }
+      
+      /* Knowledge Section */
+      .knowledge-container {
+        display: flex;
+        gap: 2rem;
+      }
+      
+      .knowledge-content {
+        flex: 1;
+      }
+      
+      .knowledge-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+      }
+      
+      .knowledge-card {
+        background: var(--white);
+        border-radius: 8px;
+        padding: 1.5rem;
+        text-align: center;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      
+      .knowledge-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+      }
+      
+      .knowledge-icon {
+        margin-bottom: 1rem;
+      }
+      
+      /* Newsletter */
+      .newsletter-flex {
+        text-align: center;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      
+      .newsletter input[type="email"] {
+        width: 100%;
+        padding: 0.8rem;
+        margin-bottom: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+      
+      /* Social */
+      .social-icons {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+      }
+      
+      .social-icons a {
+        color: var(--text-color);
+        transition: color 0.3s ease;
+      }
+      
+      .social-icons a:hover {
+        color: var(--secondary-color);
+      }
+      
+      /* Footer */
+      .footer {
+        background-color: var(--light-color);
+        padding: 2rem 0;
+      }
+      
+      .footer-flex {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      
+      .footer-links {
+        display: flex;
+        list-style: none;
+        gap: 1.5rem;
+        margin: 0;
+        padding: 0;
+      }
+      
+      .footer-links a {
+        text-decoration: none;
+        color: var(--text-color);
+      }
+      
+      /* Responsive Styles */
+      @media (max-width: 992px) {
+        .about-content {
+          flex-direction: column;
+        }
+        
+        .img_rounding {
+          width: 300px;
+          height: 300px;
+        }
+      }
+      
+      @media (max-width: 768px) {
+        .main-menu-items {
+          display: none;
+        }
+        
+        .mobile-menu-toggle {
+          display: block;
+        }
+        
+        .mobile-menu-checkbox:checked ~ .mobile-menu-items {
+          display: block;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          background-color: var(--white);
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          padding: 1rem;
+          z-index: 1001;
+        }
+        
+        .mobile-menu-list {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+        }
+        
+        .mobile-menu-list a {
+          display: block;
+          padding: 0.5rem 0;
+        }
+        
+        .img_rounding {
+          width: 250px;
+          height: 250px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+      <nav class="navbar" role="navigation" aria-label="Main Navigation">
+      <div class="navbar-flex container">
+        <a class="logo" href="#home" aria-label="Jamil home">
+          <img src="images/logo_jamil.svg" alt="Jamil logo" />
+        </a>
+
+        <div class="main-menu-items">
+          <ul class="main-menu-list">
+            <li><a href="/">Home</a></li>
+            
+            <!-- Skills Dropdown -->
+            <li class="dropdown">
+              <a href="skills.html" class="dropdown-toggle">Skills </a>
+              <ul class="dropdown-menu">
+                <li><a href="skills.html#web-dev">Web Development</a></li>
+                <li><a href="skills.html#design">UI/UX Design</a></li>
+                <li><a href="skills.html#mobile">Mobile Development</a></li>
+              </ul>
+            </li>
+            
+            <li><a href="projects.html">Projects</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li>
+              <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+                <i class="fa-brands fa-facebook"></i>
+              </a>
+            </li>
+            <li>
+              <a href="https://twitter.com" target="_blank" aria-label="Twitter">
+                <i class="fa-brands fa-twitter"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Mobile Menu with Dropdown -->
+        <div class="mobile-menu">
+          <label for="mobile-menu-checkbox" class="mobile-menu-toggle">
+            <i class="fas fa-bars fa-2x"></i>
+          </label>
+          <input type="checkbox" id="mobile-menu-checkbox" class="mobile-menu-checkbox">
+          
+          <div class="mobile-menu-items">
+            <ul class="mobile-menu-list">
+              <li><a href="/">Home</a></li>
+              
+              <!-- Mobile Skills Dropdown -->
+              <li class="mobile-dropdown">
+                <a href="skills.html" class="dropdown-toggle">Skills ▾</a>
+                <ul class="dropdown-submenu">
+                  <li><a href="skills.html#web-dev">Web Development</a></li>
+                  <li><a href="skills.html#design">UI/UX Design</a></li>
+                  <li><a href="skills.html#mobile">Mobile Development</a></li>
+                </ul>
+              </li>
+              
+              <li><a href="projects.html">Projects</a></li>
+              <li><a href="contact.html">Contact</a></li>
+              <li>
+                <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+                  <i class="fa-brands fa-facebook"></i> Facebook
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com" target="_blank" aria-label="Twitter">
+                  <i class="fa-brands fa-twitter"></i> Twitter
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <main style="margin-top: 80px;">
+      <!-- About Section -->
+      <section class="about section" id="author">
+        <div class="container">
+          <h2 class="section-title">About Me</h2>
+          <div class="about-content">
+            <div class="about-image">
+              <img src="images/github_jamil.jpeg" alt="Profile picture" class="img_rounding">
+            </div>
+            <div class="about-text">
+              <h3>Hi, I'm Jamil</h3>
+              <p>I'm a passionate web developer with expertise in front-end and back-end technologies. I love creating responsive, user-friendly websites and applications that solve real-world problems.</p>
+              <p>With experience in HTML, CSS, JavaScript, React, and Node.js, I bring a full-stack approach to web development projects. I'm constantly learning new technologies to stay at the forefront of web development.</p>
+              <a href="contact.html" class="btn">Get In Touch</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Knowledge Section -->
+      <section class="knowledge section" id="knowledge">
+        <div class="container knowledge-container">
+          <div class="knowledge-content">
+            <h2 class="section-title">My Skills & Knowledge</h2>
+            <div class="knowledge-grid">
+              <!-- HTML -->
+              <div class="knowledge-card">
+                <div class="knowledge-icon">
+                  <i class="fab fa-html5 fa-3x" style="color: #E34F26;"></i>
+                </div>
+                <h3>HTML5</h3>
+                <p>Semantic markup, accessibility, forms, and modern HTML5 APIs.</p>
+              </div>
+              
+              <!-- CSS -->
+              <div class="knowledge-card">
+                <div class="knowledge-icon">
+                  <i class="fab fa-css3-alt fa-3x" style="color: #1572B6;"></i>
+                </div>
+                <h3>CSS3</h3>
+                <p>Responsive design, Flexbox, Grid, animations, and CSS methodologies.</p>
+              </div>
+              
+              <!-- Tailwind CSS -->
+              <div class="knowledge-card">
+                <div class="knowledge-icon">
+                  <i class="fas fa-wind fa-3x" style="color: #38B2AC;"></i>
+                </div>
+                <h3>Tailwind CSS</h3>
+                <p>Utility-first CSS framework for rapid UI development with custom configurations.</p>
+              </div>
+              
+              <!-- JavaScript -->
+              <div class="knowledge-card">
+                <div class="knowledge-icon">
+                  <i class="fab fa-js-square fa-3x" style="color: #F7DF1E;"></i>
+                </div>
+                <h3>JavaScript</h3>
+                <p>ES6+, DOM manipulation, async programming, and modern JS patterns.</p>
+              </div>
+              
+              <!-- React -->
+              <div class="knowledge-card">
+                <div class="knowledge-icon">
+                  <i class="fab fa-react fa-3x" style="color: #61DAFB;"></i>
+                </div>
+                <h3>React</h3>
+                <p>Components, hooks, context API, React Router, and state management.</p>
+              </div>
+              
+              <!-- Node.js -->
+              <div class="knowledge-card">
+                <div class="knowledge-icon">
+                  <i class="fab fa-node-js fa-3x" style="color: #339933;"></i>
+                </div>
+                <h3>Node.js</h3>
+                <p>Server-side JavaScript, Express.js, REST APIs, and backend development.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Newsletter -->
+      <section class="newsletter section" id="newsletter">
+        <div class="container newsletter-flex">
+          <h2>Subscribe To My Newsletter</h2>
+          <p>
+            Stay updated with my latest projects, tutorials, and insights about web development.
+          </p>
+          <form>
+            <input
+              type="email"
+              name="email"
+              id="email"
+              placeholder="Enter your email"
+              required
+            />
+            <button type="submit" class="btn">Subscribe</button>
+          </form>
+        </div>
+      </section>
+
+      <!-- Social -->
+      <section class="social section">
+        <div class="container">
+          <p>Connect with me on social media:</p>
+          <div class="social-icons">
+            <a href="https://github.com/web-jamil" target="_blank" aria-label="GitHub">
+              <i class="fa-brands fa-github fa-2x"></i>
+            </a>
+            <a href="https://linkedin.com/in/web-jamil" target="_blank" aria-label="LinkedIn">
+              <i class="fa-brands fa-linkedin fa-2x"></i>
+            </a>
+            <a href="https://twitter.com" target="_blank" aria-label="Twitter">
+              <i class="fa-brands fa-twitter fa-2x"></i>
+            </a>
+            <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+              <i class="fa-brands fa-instagram fa-2x"></i>
+            </a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container footer-flex">
+        <ul class="footer-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="skills.html">Skills</a></li>
+          <!-- <li><a href="about.html">About</a></li> -->
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+        <p>&copy; 2025 Jamil's Portfolio. All rights reserved</p>
+      </div>
+    </footer>
+  </body>
+</html>

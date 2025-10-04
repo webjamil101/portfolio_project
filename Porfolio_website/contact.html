@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="icon" href="./images/favicon.png" />
+    <title>Contact Me | Portfolio</title>
+    <style>
+      /* Navbar Styles */
+      .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background-color: #ffffff;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        padding: 1rem 0;
+      }
+      
+      .navbar-flex {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      
+      .main-menu-list {
+        display: flex;
+        list-style: none;
+        gap: 1.5rem;
+        align-items: center;
+        margin: 0;
+        padding: 0;
+      }
+      
+      .main-menu-list a {
+        text-decoration: none;
+        color: #333;
+        font-weight: 600;
+        transition: color 0.3s ease;
+      }
+      
+      .main-menu-list a:hover {
+        color: #0066cc;
+      }
+      
+      /* Mobile Menu Toggle */
+      .mobile-menu-toggle {
+        display: none;
+        cursor: pointer;
+      }
+      
+      /* Contact Page Specific Styles */
+      .inner-header {
+        background-color: #f8f9fa;
+        padding: 6rem 0 2rem;
+        margin-top: 4rem;
+        text-align: center;
+      }
+      
+      .inner-header h1 {
+        font-size: 2.5rem;
+        color: #333;
+        margin-bottom: 1rem;
+      }
+      
+      .contact-form {
+        padding: 4rem 0;
+        background-color: #fff;
+      }
+      
+      .contact-form p {
+        font-size: 1.1rem;
+        line-height: 1.6;
+        margin-bottom: 2rem;
+        color: #555;
+      }
+      
+      .contact-form form {
+        max-width: 600px;
+        margin: 0 auto;
+      }
+      
+      .contact-form input,
+      .contact-form textarea {
+        width: 100%;
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 1rem;
+        transition: border-color 0.3s ease;
+      }
+      
+      .contact-form input:focus,
+      .contact-form textarea:focus {
+        border-color: #0066cc;
+        outline: none;
+      }
+      
+      .contact-form textarea {
+        min-height: 150px;
+        resize: vertical;
+      }
+      
+      .btn {
+        background-color: #0066cc;
+        color: white;
+        border: none;
+        padding: 1rem 2rem;
+        font-size: 1rem;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+      
+      .btn:hover {
+        background-color: #0052a3;
+      }
+      
+      .location {
+        padding: 4rem 0;
+        background-color: #f8f9fa;
+      }
+      
+      .location h2 {
+        text-align: center;
+        margin-bottom: 1.5rem;
+      }
+      
+      .location p {
+        text-align: center;
+        max-width: 700px;
+        margin: 0 auto 2rem;
+        color: #555;
+      }
+      
+      .map {
+        height: 400px;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+      
+      .map iframe {
+        width: 100%;
+        height: 100%;
+        border: none;
+      }
+      
+      /* Responsive Styles */
+      @media (max-width: 768px) {
+        .main-menu-items {
+          display: none;
+        }
+        
+        .mobile-menu-toggle {
+          display: block;
+        }
+        
+        .inner-header {
+          padding: 5rem 0 2rem;
+        }
+        
+        .contact-form,
+        .location {
+          padding: 2rem 0;
+        }
+      }
+    </style>
+  </head>
+  
+  <body>
+    <nav class="navbar" role="navigation" aria-label="Main Navigation">
+      <div class="navbar-flex container">
+       <a class="logo" href="#home" aria-label="Jamil home">
+          <img src="images/logo_jamil.svg" alt="Jamil logo" />
+        </a>
+
+        <div class="main-menu-items">
+          <ul class="main-menu-list">
+            <li><a href="/">Home</a></li>
+            <li><a href="skills.html">Skills</a></li>
+            <!-- <li><a href="abouts.html">About</a></li> -->
+            <li><a href="contact.html">Contact</a></li>
+            <li>
+              <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+                <i class="fa-brands fa-facebook"></i>
+              </a>
+            </li>
+            <li>
+              <a href="https://twitter.com" target="_blank" aria-label="Twitter">
+                <i class="fa-brands fa-twitter"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu">
+          <label for="mobile-menu-checkbox" class="mobile-menu-toggle">
+            <i class="fas fa-bars fa-2x"></i>
+          </label>
+          <input type="checkbox" id="mobile-menu-checkbox" class="mobile-menu-checkbox">
+          
+          <div class="mobile-menu-items">
+            <ul class="mobile-menu-list">
+              <li><a href="/">Home</a></li>
+              <li><a href="#knowledge">Skills</a></li>
+              <li><a href="#author">About</a></li>
+              <li><a href="contact.html">Contact</a></li>
+              <li>
+                <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+                  <i class="fa-brands fa-facebook"></i> Facebook
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com" target="_blank" aria-label="Twitter">
+                  <i class="fa-brands fa-twitter"></i> Twitter
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Inner Header -->
+    <header class="inner-header">
+      <div class="container-sm">
+        <h1>Get In Touch</h1>
+        <p>I'd love to hear from you! Whether you have a project in mind or just want to say hello.</p>
+      </div>
+    </header>
+
+    <section class="contact-form section">
+      <div class="container-sm">
+        <div class="contact-info">
+          <div class="info-item">
+            <i class="fas fa-envelope fa-2x"></i>
+            <h3>Email Me</h3>
+            <a href="mailto:contact@example.com">jamiluddin3282003@gmai.com</a>
+          </div>
+          <div class="info-item">
+            <i class="fas fa-phone fa-2x"></i>
+            <h3>Call Me</h3>
+            <a href="tel:+1234567890">+01785-045936</a>
+          </div>
+        </div>
+
+        <form action="https://formspree.io/f/myyrqerl" method="POST">
+          <div class="form-group">
+            <input type="text" name="name" placeholder="Your Name" required />
+          </div>
+          <div class="form-group">
+            <input type="email" name="email" placeholder="Your Email" required />
+          </div>
+          <div class="form-group">
+            <input type="text" name="subject" placeholder="Subject" />
+          </div>
+          <div class="form-group">
+            <textarea name="message" placeholder="Your Message" required></textarea>
+          </div>
+          <button type="submit" class="btn">Send Message</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Location -->
+    <section class="location section">
+      <div class="container-sm">
+        <h2>Where To Find Me</h2>
+        <p>
+          Based in Bangladesh, but available for remote work worldwide. Feel free to reach out regardless of your location.
+        </p>
+        <div class="map">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1241.5303553091994!2d-0.14076024298621118!3d51.51210217963597!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x487604d502268421%3A0x6a7d62889992f993!2sRegent+St%2C+Soho%2C+London+W1B+5TH%2C+UK!5e0!3m2!1sen!2sro!4v1476174541049"
+            allowfullscreen
+            loading="lazy"
+          ></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- Social -->
+    <section class="social section">
+      <div class="container">
+        <h2>Connect With Me</h2>
+        <p>Follow me on social media to stay updated with my latest projects and insights.</p>
+        <div class="social-icons">
+          <a href="https://github.com" target="_blank" aria-label="GitHub">
+            <i class="fa-brands fa-github fa-2x"></i>
+          </a>
+          <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn">
+            <i class="fa-brands fa-linkedin fa-2x"></i>
+          </a>
+          <a href="https://twitter.com" target="_blank" aria-label="Twitter">
+            <i class="fa-brands fa-twitter fa-2x"></i>
+          </a>
+          <a href="https://instagram.com" target="_blank" aria-label="Instagram">
+            <i class="fa-brands fa-instagram fa-2x"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container footer-flex">
+        <ul class="footer-links">
+          <li><a href="/">Home</a></li>
+          <li><a href="#knowledge">Skills</a></li>
+          <li><a href="#author">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+        <p>&copy; 2024 My Portfolio. All rights reserved</p>
+      </div>
+    </footer>
+
+    <style>
+      /* Contact Info Styles */
+      .contact-info {
+        display: flex;
+        justify-content: center;
+        gap: 3rem;
+        margin-bottom: 3rem;
+        flex-wrap: wrap;
+      }
+      
+      .info-item {
+        text-align: center;
+        padding: 1.5rem;
+        background: #f8f9fa;
+        border-radius: 8px;
+        min-width: 200px;
+        transition: transform 0.3s ease;
+      }
+      
+      .info-item:hover {
+        transform: translateY(-5px);
+      }
+      
+      .info-item i {
+        color: #0066cc;
+        margin-bottom: 1rem;
+      }
+      
+      .info-item h3 {
+        margin-bottom: 0.5rem;
+        color: #333;
+      }
+      
+      .info-item a {
+        color: #555;
+        text-decoration: none;
+        transition: color 0.3s ease;
+      }
+      
+      .info-item a:hover {
+        color: #0066cc;
+      }
+      
+      /* Mobile Menu Checkbox Hack */
+      .mobile-menu-checkbox {
+        display: none;
+      }
+      
+      .mobile-menu-items {
+        display: none;
+      }
+      
+      .mobile-menu-checkbox:checked ~ .mobile-menu-items {
+        display: block;
+      }
+    </style>
+  </body>
+</html>

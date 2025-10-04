@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="./css/styles.css" />
+    <link rel="stylesheet" href="./css/knowledge.css" />
+    <link rel="icon" href="./images/jamil.png" />
+    <title>My Skills | Personal Portfolio</title>
+    <style>
+      /* Navbar Styles */
+      .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background-color: #d9b4b4;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        padding: 1rem 0;
+      }
+
+      .navbar-flex {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      /* Dropdown Styles */
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-toggle::after {
+      content: " ▾";
+      display: inline-block;
+    }
+
+    .dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background: #fff;
+      min-width: 200px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    .dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .dropdown-menu li {
+      padding: 0;
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 10px 15px;
+      color: #333;
+      transition: background 0.3s;
+    }
+
+    .dropdown-menu a:hover {
+      background: #f5f5f5;
+    }
+
+    /* Mobile Dropdown Styles */
+    .mobile-dropdown .dropdown-submenu {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease;
+      padding-left: 20px;
+    }
+
+    .mobile-menu-checkbox:checked ~ .mobile-menu-items .mobile-dropdown .dropdown-submenu {
+      max-height: 500px; /* Adjust based on content */
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      .dropdown-menu {
+        position: static;
+        box-shadow: none;
+        opacity: 1;
+        visibility: visible;
+        display: none;
+        background: #f9f9f9;
+      }
+      
+      .dropdown:hover .dropdown-menu {
+        display: block;
+      }
+      
+      .mobile-dropdown .dropdown-toggle::after {
+        content: " ▾";
+        float: right;
+      }
+    }
+
+      /* Navbar Image Rounding */
+      .img_rounding {
+        border-radius: 50%;
+        width: 400px;
+        height: 400px;
+        object-fit: cover;
+        border: 2px solid #ffffff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+
+      .img_rounding:hover {
+        transform: scale(1.1);
+      }
+
+      /* Main Menu Styles */
+      .main-menu-list {
+        display: flex;
+        list-style: none;
+        gap: 1.5rem;
+        align-items: center;
+        margin: 0;
+        padding: 0;
+      }
+
+      .main-menu-list a {
+        text-decoration: none;
+        color: #333;
+        font-weight: 600;
+        transition: color 0.3s ease;
+      }
+
+      .main-menu-list a:hover {
+        color: #0066cc;
+      }
+
+      /* Mobile Menu Toggle - Hidden by default */
+      .mobile-menu-toggle {
+        display: none;
+        cursor: pointer;
+      }
+
+      /* Mobile Menu Items - Hidden by default */
+      .mobile-menu-items {
+        display: none;
+      }
+
+      /* Responsive Styles */
+      @media (max-width: 768px) {
+        .main-menu-items {
+          display: none;
+        }
+
+        .mobile-menu-toggle {
+          display: block;
+        }
+
+        /* Show mobile menu when checkbox is checked */
+        .mobile-menu-items.active {
+          display: block;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          background-color: #ffffff;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          padding: 1rem;
+          z-index: 1001;
+        }
+
+        .mobile-menu-list {
+          list-style: none;
+          padding: 0;
+          margin: 0;
+          display: flex;
+          flex-direction: column;
+          gap: 1rem;
+        }
+
+        .mobile-menu-list a {
+          display: block;
+          padding: 0.5rem 0;
+        }
+      }
+
+      /* Knowledge Section Styles */
+      .section {
+        padding: 4rem 0;
+      }
+
+      .container {
+        width: 90%;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      .section-title {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 3rem;
+        color: #333;
+      }
+
+      .knowledge-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      .knowledge-card {
+        background: #fff;
+        border-radius: 8px;
+        padding: 2rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        text-align: center;
+      }
+
+      .knowledge-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      .knowledge-icon {
+        margin-bottom: 1.5rem;
+      }
+
+      .knowledge-card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        color: #333;
+      }
+
+      .knowledge-card p {
+        color: #666;
+        line-height: 1.6;
+      }
+    </style>
+  </head>
+  <body>
+   <nav class="navbar" role="navigation" aria-label="Main Navigation">
+  <div class="navbar-flex container">
+    <a class="logo" href="#home" aria-label="Jamil home">
+      <img src="images/logo_jamil.svg" alt="Jamil logo" />
+    </a>
+
+    <div class="main-menu-items">
+      <ul class="main-menu-list">
+        <li><a href="/">Home</a></li>
+        
+        <!-- Skills Dropdown -->
+        <li class="dropdown">
+          <a href="skills.html" class="dropdown-toggle">Skills </a>
+          <ul class="dropdown-menu">
+            <li><a href="skills.html#web-dev">Web Development</a></li>
+            <li><a href="skills.html#design">UI/UX Design</a></li>
+            <li><a href="skills.html#mobile">Mobile Development</a></li>
+          </ul>
+        </li>
+        
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li>
+          <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+            <i class="fa-brands fa-facebook"></i>
+          </a>
+        </li>
+        <li>
+          <a href="https://twitter.com" target="_blank" aria-label="Twitter">
+            <i class="fa-brands fa-twitter"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Mobile Menu with Dropdown -->
+    <div class="mobile-menu">
+      <label for="mobile-menu-checkbox" class="mobile-menu-toggle">
+        <i class="fas fa-bars fa-2x"></i>
+      </label>
+      <input type="checkbox" id="mobile-menu-checkbox" class="mobile-menu-checkbox">
+      
+      <div class="mobile-menu-items">
+        <ul class="mobile-menu-list">
+          <li><a href="/">Home</a></li>
+          
+          <!-- Mobile Skills Dropdown -->
+          <li class="mobile-dropdown">
+            <a href="skills.html" class="dropdown-toggle">Skills </a>
+            <ul class="dropdown-submenu">
+              <li><a href="skills.html#web-dev">Web Development</a></li>
+              <li><a href="skills.html#design">UI/UX Design</a></li>
+              <li><a href="skills.html#mobile">Mobile Development</a></li>
+            </ul>
+          </li>
+          
+          <li><a href="projects.html">Projects</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li>
+            <a href="https://facebook.com" target="_blank" aria-label="Facebook">
+              <i class="fa-brands fa-facebook"></i> Facebook
+            </a>
+          </li>
+          <li>
+            <a href="https://twitter.com" target="_blank" aria-label="Twitter">
+              <i class="fa-brands fa-twitter"></i> Twitter
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+    <main style="margin-top: 80px">
+      <!-- Knowledge Section -->
+      <section class="knowledge section" id="knowledge">
+        <div class="container knowledge-container">
+          <div class="knowledge-content">
+            <h2 class="section-title">My Skills & Expertise</h2>
+            <p
+              class="section-subtitle"
+              style="text-align: center; margin-bottom: 2rem; color: #666"
+            >
+              Here's a comprehensive look at my technical skills and areas of
+              expertise
+            </p>
+            <div class="knowledge-grid">
+              <!-- HTML -->
+              <div class="knowledge-card">
+                <div class="knowledge-icon">
+                  <i class="fab fa-html5 fa-3x" style="color: #e34f26"></i>
+                </div>
+                <h3>HTML5</h3>
+                <p>
+                  Semantic markup, accessibility, forms, and modern HTML5 APIs.
+                  I create clean, well-structured HTML that follows best
+                  practices.
+                </p>
+                <div class="skill-level" style="margin-top: 1rem">
+                  <div
+                    style="
+                      background: #f1f1f1;
+                      border-radius: 5px;
+                      height: 10px;
+                    "
+                  >
+                    <div
+                      style="
+                        background: #e34f26;
+                        width: 95%;
+                        height: 100%;
+                        border-radius: 5px;
+                      "
+                    ></div>
+                  </div>
+                  <p style="text-align: right; margin-top: 0.5rem; color: #666">
+                    95%
+                  </p>
+                </div>
+              </div>
+
+              <!-- CSS -->
+              <div class="knowledge-card">
+                <div class="knowledge-icon">
+                  <i class="fab fa-css3-alt fa-3x" style="color: #1572b6"></i>
+                </div>
+                <h3>CSS3</h3>
+                <p>
+                  Responsive design, Flexbox, Grid, animations, and CSS
+                  methodologies like BEM. I craft beautiful, responsive
+                  interfaces.
+                </p>
+                <div class="skill-level" style="margin-top: 1rem">
+                  <div
+                    style="
+                      background: #f1f1f1;
+                      border-radius: 5px;
+                      height: 10px;
+                    "
+                  >
+                    <div
+                      style="
+                        background: #1572b6;
+                        width: 90%;
+                        height: 100%;
+                        border-radius: 5px;
+                      "
+                    ></div>
+                  </div>
+                  <p style="text-align: right; margin-top: 0.5rem; color: #666">
+                    90%
+                  </p>
+                </div>
+              </div>
+
+              <!-- JavaScript -->
+              <div class="knowledge-card">
+                <div class="knowledge-icon">
+                  <i class="fab fa-js-square fa-3x" style="color: #f7df1e"></i>
+                </div>
+                <h3>JavaScript</h3>
+                <p>
+                  ES6+, DOM manipulation, async programming, and modern JS
+                  patterns. I build interactive, dynamic web applications.
+                </p>
+                <div class="skill-level" style="margin-top: 1rem">
+                  <div
+                    style="
+                      background: #f1f1f1;
+                      border-radius: 5px;
+                      height: 10px;
+                    "
+                  >
+                    <div
+                      style="
+                        background: #f7df1e;
+                        width: 85%;
+                        height: 100%;
+                        border-radius: 5px;
+                      "
+                    ></div>
+                  </div>
+                  <p style="text-align: right; margin-top: 0.5rem; color: #666">
+                    85%
+                  </p>
+                </div>
+              </div>
+
+              <!-- React -->
+              <div class="knowledge-card">
+                <div class="knowledge-icon">
+                  <i class="fab fa-react fa-3x" style="color: #61dafb"></i>
+                </div>
+                <h3>React</h3>
+                <p>
+                  Components, hooks, context API, React Router, and state
+                  management. I develop scalable front-end architectures.
+                </p>
+                <div class="skill-level" style="margin-top: 1rem">
+                  <div
+                    style="
+                      background: #f1f1f1;
+                      border-radius: 5px;
+                      height: 10px;
+                    "
+                  >
+                    <div
+                      style="
+                        background: #61dafb;
+                        width: 80%;
+                        height: 100%;
+                        border-radius: 5px;
+                      "
+                    ></div>
+                  </div>
+                  <p style="text-align: right; margin-top: 0.5rem; color: #666">
+                    80%
+                  </p>
+                </div>
+              </div>
+
+              <!-- Node.js -->
+              <div class="knowledge-card">
+                <div class="knowledge-icon">
+                  <i class="fab fa-node-js fa-3x" style="color: #339933"></i>
+                </div>
+                <h3>Node.js</h3>
+                <p>
+                  Server-side JavaScript, Express.js, REST APIs, and backend
+                  development. I create robust server applications.
+                </p>
+                <div class="skill-level" style="margin-top: 1rem">
+                  <div
+                    style="
+                      background: #f1f1f1;
+                      border-radius: 5px;
+                      height: 10px;
+                    "
+                  >
+                    <div
+                      style="
+                        background: #339933;
+                        width: 75%;
+                        height: 100%;
+                        border-radius: 5px;
+                      "
+                    ></div>
+                  </div>
+                  <p style="text-align: right; margin-top: 0.5rem; color: #666">
+                    75%
+                  </p>
+                </div>
+              </div>
+
+              <!-- Database -->
+              <div class="knowledge-card">
+                <div class="knowledge-icon">
+                  <i class="fas fa-database fa-3x" style="color: #00758f"></i>
+                </div>
+                <h3>Database</h3>
+                <p>
+                  MongoDB, PostgreSQL, and database design. I implement
+                  efficient data storage and retrieval solutions.
+                </p>
+                <div class="skill-level" style="margin-top: 1rem">
+                  <div
+                    style="
+                      background: #f1f1f1;
+                      border-radius: 5px;
+                      height: 10px;
+                    "
+                  >
+                    <div
+                      style="
+                        background: #00758f;
+                        width: 70%;
+                        height: 100%;
+                        border-radius: 5px;
+                      "
+                    ></div>
+                  </div>
+                  <p style="text-align: right; margin-top: 0.5rem; color: #666">
+                    70%
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Additional Skills Section -->
+      <section class="section" style="background: #f9f9f9">
+        <div class="container">
+          <h2 class="section-title">Additional Skills</h2>
+          <div
+            class="additional-skills"
+            style="
+              display: flex;
+              flex-wrap: wrap;
+              gap: 1rem;
+              justify-content: center;
+            "
+          >
+            <div
+              class="skill-tag"
+              style="
+                background: #e0e0e0;
+                padding: 0.5rem 1rem;
+                border-radius: 20px;
+                font-weight: 600;
+              "
+            >
+              Git
+            </div>
+            <div
+              class="skill-tag"
+              style="
+                background: #e0e0e0;
+                padding: 0.5rem 1rem;
+                border-radius: 20px;
+                font-weight: 600;
+              "
+            >
+              Webpack
+            </div>
+            <div
+              class="skill-tag"
+              style="
+                background: #e0e0e0;
+                padding: 0.5rem 1rem;
+                border-radius: 20px;
+                font-weight: 600;
+              "
+            >
+              Jest
+            </div>
+            <div
+              class="skill-tag"
+              style="
+                background: #e0e0e0;
+                padding: 0.5rem 1rem;
+                border-radius: 20px;
+                font-weight: 600;
+              "
+            >
+              Docker
+            </div>
+            <div
+              class="skill-tag"
+              style="
+                background: #e0e0e0;
+                padding: 0.5rem 1rem;
+                border-radius: 20px;
+                font-weight: 600;
+              "
+            >
+              AWS
+            </div>
+            <div
+              class="skill-tag"
+              style="
+                background: #e0e0e0;
+                padding: 0.5rem 1rem;
+                border-radius: 20px;
+                font-weight: 600;
+              "
+            >
+              CI/CD
+            </div>
+            <div
+              class="skill-tag"
+              style="
+                background: #e0e0e0;
+                padding: 0.5rem 1rem;
+                border-radius: 20px;
+                font-weight: 600;
+              "
+            >
+              Agile
+            </div>
+            <div
+              class="skill-tag"
+              style="
+                background: #e0e0e0;
+                padding: 0.5rem 1rem;
+                border-radius: 20px;
+                font-weight: 600;
+              "
+            >
+              UI/UX
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="footer">
+        <div class="container footer-flex">
+          <ul class="footer-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="skills.html" class="active">Skills</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+          </ul>
+          <p>&copy; 2024 Jamil's Portfolio. All rights reserved</p>
+        </div>
+      </footer>
+    </main>
+
+    <style>
+      /* Mobile Menu Checkbox Hack */
+      .mobile-menu-checkbox {
+        display: none;
+      }
+
+      .mobile-menu-items {
+        display: none;
+      }
+
+      .mobile-menu-checkbox:checked ~ .mobile-menu-items {
+        display: block;
+      }
+    </style>
+  </body>
+</html>
