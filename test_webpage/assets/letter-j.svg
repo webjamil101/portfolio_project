@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="768" height="768" viewBox="0 0 768 768" aria-labelledby="title desc" role="img">
+  <title>Lowercase j on mustard background</title>
+  <desc>Minimalist lowercase j centered on a mustard yellow background.</desc>
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="#F0B04F"/>
+  <!-- Glyph: lowercase j built from a rounded stem and a curved hook -->
+  <g fill="#243444">
+    <!-- Stem -->
+    <rect x="360" y="140" width="48" height="440" rx="24" ry="24"/>
+    <!-- Hook (quarter circle + capsule) -->
+    <path d="M 408 540
+             c 0 88 -72 160 -160 160
+             h -32
+             a 24 24 0 0 1 0 -48
+             h 32
+             c 62.8 0 112 -49.2 112 -112
+             a 24 24 0 0 1 48 0z"/>
+    <!-- Dot (optional for lowercase j; remove if you prefer no dot) -->
+    <!-- <circle cx="384" cy="92" r="22"/> -->
+  </g>
+</svg>
